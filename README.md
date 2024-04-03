@@ -3,7 +3,7 @@
 ![GitHub file size in bytes](https://img.shields.io/github/size/LHQS-MSU/FridgeBot/tester.py?color=pink)
 ![Lines of code](https://tokei.rs/b1/github/LHQS-MSU/FridgeBot?color=purple&style=flat)
 [![pylint](https://img.shields.io/badge/PyLint-10.00-brightgreen?logo=python&logoColor=white)
-[![GitHub Workflow Status](https://github.com/LHQS-MSU/FridgeBot/actions/workflows/python-client.yml/badge.svg)](https://github.com/LHQS-MSU/FridgeBot/actions/workflows/python-client.yml)
+[![GitHub Workflow Status](https://github.com/LHQS-MSU/FridgeBot/actions/workflows/pylint.yml/badge.svg)](https://github.com/LHQS-MSU/FridgeBot/actions/workflows/pylint.yml)
 ![GitHub watchers](https://img.shields.io/github/watchers/LHQS-MSU/FridgeBot)
 
 
