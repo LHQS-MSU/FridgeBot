@@ -34,3 +34,4 @@ jobs:
     - name: Lint with pylint
       run: |
         pylint tester.py
+        pylint fridge_bot.py
