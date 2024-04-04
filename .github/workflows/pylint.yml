@@ -16,8 +16,10 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - uses: Silleellie/pylint-github-action@v2
       with:
-        lint-path: tester.py
-        python-version: 3.9
+        lint-path: |
+          fridge_bot.py
+          tester.py
+        python-version: 3.10
         color-good-score: brightgreen
         color-perfect-score: brightgreen
     - name: Install dependencies
