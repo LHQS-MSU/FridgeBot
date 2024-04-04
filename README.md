@@ -2,7 +2,7 @@
 ![Static Badge](https://img.shields.io/badge/Fridge-BlueFors-orange)
 ![GitHub file size in bytes](https://img.shields.io/github/size/LHQS-MSU/FridgeBot/tester.py?color=pink)
 ![Lines of code](https://tokei.rs/b1/github/LHQS-MSU/FridgeBot?color=purple&style=flat)
-[![pylint]()](https://redirect/link)
+[![pylint](https://img.shields.io/badge/PyLint-0.00-red?logo=python&logoColor=whitehttps://img.shields.io/badge/PyLint-0.00-red?logo=python&logoColor=white)
 [![GitHub Workflow Status](https://github.com/LHQS-MSU/FridgeBot/actions/workflows/pylint.yml/badge.svg)](https://github.com/LHQS-MSU/FridgeBot/actions/workflows/pylint.yml)
 ![GitHub watchers](https://img.shields.io/github/watchers/LHQS-MSU/FridgeBot)
 
