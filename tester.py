@@ -1,13 +1,19 @@
+"""
+Project: Telegram Bot LHQS Fridge Alert System
+Developer: Abby Peterson (credit to Niyaz)
+Purpose: 
+Timeline: Need discovered September 2023, Finished May 2024
+"""
 import asyncio
 #from distutils.cmd import Command # pip install -U aiogram
 import logging
 import sys
-from os import getenv
+#from os import getenv
 
-from aiogram import Bot, Dispatcher, Router, types #executor
-from aiogram.enums import ParseMode
+from aiogram import Bot, Dispatcher #Router, types #executor
+#from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart, Command
-from aiogram.filters.command import CommandObject
+#from aiogram.filters.command import CommandObject
 from aiogram.types import Message
 from aiogram.utils.markdown import hbold #bold, text #hspoiler
 from telegram.ext import ConversationHandler
@@ -80,9 +86,9 @@ async def command_errors_handler(message: Message) -> None:
 #@dp.
 
 async def main() -> None:
-    # Initialize Bot instance with a default parse mode which will be passed to all API calls
+    """HOLDER...# Initialize Bot instance with a default parse mode which will be passed to all API calls
     #bot = Bot(TOKEN, parse_mode=ParseMode.HTML)
-    # And the run events dispatching
+    # And the run events dispatching"""
     await dp.start_polling(bot) #keep this at the end always
 
 
