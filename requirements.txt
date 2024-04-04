@@ -1,1 +1,3 @@
 pylint
+aiogram
+telegram
