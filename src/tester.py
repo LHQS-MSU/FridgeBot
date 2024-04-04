@@ -1,6 +1,6 @@
 """
 Project: Telegram Bot LHQS Fridge Alert System
-Developer: Abby Peterson (credit to Niyaz)
+Developer: Abby Peterson (credit to Niyaz Beysengulov)
 Purpose: 
 Timeline: Need discovered September 2023, Finished May 2024
 """
