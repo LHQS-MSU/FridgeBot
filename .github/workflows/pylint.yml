@@ -22,8 +22,7 @@ jobs:
     - uses: Silleellie/pylint-github-action@v2
       with:
         lint-path: |
-          fridge_bot.py
-          tester.py
+          src/tester.py
         python-version: 3.9
         color-good-score: brightgreen
         color-perfect-score: brightgreen
@@ -33,5 +32,4 @@ jobs:
         pip install -r requirements.txt
     - name: Lint with pylint
       run: |
-        pylint tester.py
-        pylint fridge_bot.py
+        pylint src/tester.py
