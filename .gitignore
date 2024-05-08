@@ -3,6 +3,8 @@ __pycache__/
 
 *.DS_Store
 
+.env
+
 # IPython
 profile_default/
 ipython_config.py

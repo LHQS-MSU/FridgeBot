@@ -4,10 +4,13 @@
 # pip install -U aiogram
 
 from time import sleep
+import os
 
 from aiogram import Bot, Dispatcher, executor, types
 
-bot = Bot(token='6789765586:AAE-XUmzOAfF_X6fVrNiFCn7Wln4yD5jWcs')
+USER_KEY = os.getenv('MEMBER_KEY') # what users should send bot when prompted, to get access
+
+bot = Bot(token=os.getenv('BOT_TOKEN'))
 #BOT_USERNAME: '@blueforsfridgebot'
 dp = Dispatcher(bot)
 

@@ -8,7 +8,7 @@ import asyncio
 #from distutils.cmd import Command # pip install -U aiogram
 import logging
 import sys
-#from os import getenv
+import os
 
 from aiogram import Bot, Dispatcher #Router, types #executor
 #from aiogram.enums import ParseMode
@@ -19,10 +19,9 @@ from aiogram.utils.markdown import hbold #bold, text #hspoiler
 from telegram.ext import ConversationHandler
 
 # Bot token can be obtained via https://t.me/BotFather
-#TOKEN = str(getenv("BOT_TOKEN")) #11/14 not working
 
-API_TOKEN = '6789765586:AAE-XUmzOAfF_X6fVrNiFCn7Wln4yD5jWcs'
-USER_KEY = 'BPS1600xyz' # what users should send bot when prompted, to get access
+API_TOKEN = os.getenv('BOT_TOKEN')
+USER_KEY = os.getenv('MEMBER_KEY') # what users should send bot when prompted, to get access
 
 # Initialize bot and dispatcher
 bot = Bot(token=API_TOKEN)
