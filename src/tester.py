@@ -17,10 +17,11 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from aiogram.utils.markdown import hbold #bold, text #hspoiler
 from telegram.ext import ConversationHandler
+from dotenv import load_dotenv
 
-# Bot token can be obtained via https://t.me/BotFather
+load_dotenv() # will search for .env file in local folder and load variables
 
-API_TOKEN = os.getenv('BOT_TOKEN')
+API_TOKEN = os.getenv('BOT_TOKEN') # Bot token can be obtained via https://t.me/BotFather
 USER_KEY = os.getenv('MEMBER_KEY') # what users should send bot when prompted, to get access
 
 # Initialize bot and dispatcher
@@ -44,7 +45,9 @@ async def command_start_handler(message: Message) -> None:
     # method automatically or call API method directly via
     # Bot instance: `bot.send_message(chat_id=message.chat.id, ...)`
     #GIVEN: await message.answer(f"Hello, {hbold(message.from_user.full_name)}!")
-    await message.reply(F"Welcome {hbold(message.from_user.full_name)}! Now please /signup")
+    await message.answer(F"Welcome {message.from_user.full_name}! Now please /signup")
+    print(F"ID {message.from_user.id}")
+    print(F"NAME {message.from_user.first_name}")
 
 
 # Custom Commands...
@@ -55,13 +58,14 @@ async def command_signup_handler(message: Message) -> None:
     # ask user to send the LHQS Bot access code.
     await message.answer("Let's get you signed up! Please respond with the LHQS code to qualify.")
     # if proper code, add user id to user_list
+    #await message.reply("")
     # else if user id in denied_list
     #   "Sorry, looks like we're done here."
     # else
     #   ctr++
     #   "Sorry, you've got it wrong pal!"
 
-@dp.message(ConversationHandler( #Still working on it!... 12/15
+'''@dp.message(ConversationHandler( #Still working on it!... 12/15
     entry_points=[Command("signup")],
     states={
         ATTEMPT1: [],
@@ -70,7 +74,7 @@ async def command_signup_handler(message: Message) -> None:
         FINALRESULT: []
     },
     fallbacks=[CommandStart()],
-))
+))'''
 
 @dp.message(Command("checkstatus"))
 async def command_status_handler(message: Message) -> None:
