@@ -23,8 +23,7 @@ jobs:
       with:
         lint-path: >
           testing/tester.py
-          src/fridge_bot.py
-          src/bluefors_comm.py
+          src/*.py
         python-version: 3.9
         color-good-score: brightgreen
         color-perfect-score: brightgreen
@@ -34,6 +33,4 @@ jobs:
         pip install -r requirements.txt
     - name: Lint with pylint
       run: |
-        pylint testing/tester.py
-        pylint src/fridge_bot.py
-        pylint src/bluefors_comm.py
+        pylint testing/tester.py src/fridge_bot.py src/bluefors_comm.py
