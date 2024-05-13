@@ -2,4 +2,4 @@ pylint
 aiogram
 telegram
 python-telegram-bot
-dotenv
+python-dotenv
