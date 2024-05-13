@@ -9,8 +9,9 @@ import asyncio
 import logging
 import sys
 import os
+import time
 
-from aiogram import Bot, Dispatcher #Router, types #executor
+from aiogram import Bot, Dispatcher, types #Router #executor
 #from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart, Command
 #from aiogram.filters.command import CommandObject
@@ -64,6 +65,27 @@ async def command_signup_handler(message: Message) -> None:
     #   ctr++
     #   "Sorry, you've got it wrong pal!"
 
+@dp.message(Command("help"))
+async def get_status(message: types.Message):
+    global counter
+    print(f"MY ID? {message.from_user.id}")
+    if str(message.from_user.id) == "6783498213":
+        if counter > 0: 
+            full_message = f'<tg-spoiler> REMAINING ATTEMPTS: {counter}</tg-spoiler> \n \n'
+            counter = counter - 1
+            await message.reply(full_message, reply=False, parse_mode= 'HTML')
+        else:
+            final_message = 'WARNING \nMaster protocol has been initiated \nOpening V18 and V19 to vent \nPlease wait...'
+            script_dir = os.path.dirname(__file__)  # Get the directory of the current script
+            image_path = os.path.join(script_dir, 'quackQuack.jpg')
+            joephoto = open(image_path, 'rb')
+            #?? joephoto = open('quackQuack.jpg', 'rb')
+            await message.reply(final_message, reply=False)
+            time.sleep(5)
+            await bot.send_photo('6783498213', joephoto)
+    else:
+        await message.reply("Hello!!!", reply=False, parse_mode= 'HTML')
+
 '''@dp.message(ConversationHandler( #Still working on it!... 12/15
     entry_points=[Command("signup")],
     states={
@@ -106,5 +128,6 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
+    counter = 5
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     asyncio.run(main())

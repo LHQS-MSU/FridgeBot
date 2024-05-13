@@ -89,9 +89,12 @@ async def main() -> None:
             which will be passed to all API calls
     #bot = Bot(TOKEN, parse_mode=ParseMode.HTML)
     # And the run events dispatching"""
+
     await dp.start_polling(bot) #keep this at the end always
 
 
 if __name__ == "__main__":
+    #start_cont_check_logs() <-- bluefors_comm.py funct
+    #NOTE: do I need to stop it?? or does CTR^C work? 5/13
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     asyncio.run(main())
