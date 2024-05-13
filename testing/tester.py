@@ -15,7 +15,6 @@ from aiogram import Bot, Dispatcher #Router, types #executor
 from aiogram.filters import CommandStart, Command
 #from aiogram.filters.command import CommandObject
 from aiogram.types import Message
-from aiogram.utils.markdown import hbold #bold, text #hspoiler
 from telegram.ext import ConversationHandler
 from dotenv import load_dotenv
 
