@@ -6,14 +6,19 @@ Purpose:
 Timeline: Need discovered September 2023, Finished May 2024
 """
 import asyncio
+import imp
 import logging
 import sys
 import os
+
 #from time import sleep
 from aiogram import Bot, Dispatcher
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from dotenv import load_dotenv
+
+from bluefors_comm import *
+from backend import db_comm
 
 load_dotenv() # will search for .env file in local folder and load variables
 
@@ -99,5 +104,8 @@ async def main() -> None:
 if __name__ == "__main__":
     #start_cont_check_logs() <-- bluefors_comm.py funct
     #NOTE: do I need to stop it?? or does CTR^C work? 5/13
+    db_comm.create_tables()
+    #TEST db_comm.add_member() <-- passed :) 5/14/24
+
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     asyncio.run(main())
