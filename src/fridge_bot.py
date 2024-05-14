@@ -41,20 +41,20 @@ async def command_start_handler(message: Message) -> None:
     # and the target chat will be passed to :ref:`aiogram.methods.send_message.SendMessage`
     # method automatically or call API method directly via
     # Bot instance: `bot.send_message(chat_id=message.chat.id, ...)`
-    #GIVEN: await message.answer(f"Hello, {hbold(message.from_user.full_name)}!")
     await message.answer(F"Welcome {message.from_user.full_name}! Now please /signup")
     print(F"ID {message.from_user.id}")
     print(F"NAME {message.from_user.first_name}")
 
+# Custom Commands
 @dp.message(Command("help"))
 async def command_help_handler(message: Message) -> None:
     """
     This handler receives messages with `/help` command and
     """
+    #TODO: make much more detailed & helpful lol
+    #GIVEN: await message.answer(f"Hello, {hbold(message.from_user.full_name)}!")
     await message.answer("If you are a member of MSU LHQS try typing /start")
 
-
-# Custom Commands
 @dp.message(Command("signup"))
 async def command_signup_handler(message: Message) -> None:
     """ /signup - how a new user proves they should be on the research team list"""
@@ -67,54 +67,49 @@ async def command_code_handler(message: Message) -> None:
     given_code = str(message.text)[6:]
     await message.answer(f"I see you sent code: {given_code}")
     if given_code == USER_KEY:
-        #add user id to user_list
+        #TODO: add user id to user_list
         await message.reply("YOU DID IT!")
     else:
-    #   ctr++
         await message.reply("Sorry, you've got it wrong pal.")
 
 @dp.message(Command("checkstatus"))
 async def command_status_handler(message: Message) -> None:
     """/checkstatus - to get an immediate update on the main fridge stats"""
-    # get experiment chamber temp
+    # TODO: get experiment chamber temp using bluefors_comm.py
     await message.answer("How's our fridge doin you ask?")
 
 @dp.message(Command("errorhistory"))
 async def command_errors_handler(message: Message) -> None:
     """/errorhistory - to get list of past fridge issues and dates"""
+    # TODO: pull from db_comm.py for the fridge table's data
     await message.answer("Below is the error history for FRIDGEX")
 
 @dp.message(Command("getalerts"))
 async def command_yesalert_handler(message: Message) -> None:
     """FILLER"""
-    # sign up for live alerts
-    #   add user id to alert_list
+    # TODO: sign up for live alerts using db_comm method
     await message.answer("Ya wanna sign up for alerts? Try again tomorrow...")
 
 @dp.message(Command("stopalerts"))
 async def command_noalert_handler(message: Message) -> None:
     """FILLER"""
-    # sign up for live alerts
-    #   add user id to alert_list
+    # TODO: sign off live alerts using db_comm method
     await message.answer("Ya wanna stop your alerts? Try again tomorrow...")
 
-# Initiate/send warning alerts -- not sure how to do this yet
+# TODO: Initiate/send warning alerts -- not sure how to do this yet
 #   frequently read .txt files on comp
 #   if *all these conditions*
 #       send correlating error message to alert_list
 
 async def main() -> None:
-    """HOLDER...# Initialize Bot instance with a default parse mode
-            which will be passed to all API calls
-    #bot = Bot(TOKEN, parse_mode=ParseMode.HTML)
-    # And the run events dispatching"""
-
+    """FILLER"""
     await dp.start_polling(bot) #keep this at the end always
 
 
 if __name__ == "__main__":
-    #start_cont_check_logs() <-- bluefors_comm.py funct
+    #TODO: start_cont_check_logs() <-- bluefors_comm.py funct
     #NOTE: do I need to stop it?? or does CTR^C work? 5/13
+
     db_comm.create_tables()
     #TEST db_comm.add_member() <-- passed :) 5/14/24
 

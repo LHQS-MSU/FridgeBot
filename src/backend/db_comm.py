@@ -20,6 +20,7 @@ keys2_init = "(ordering integer, date text, time text, loc text, val float, erro
 keys2_string = "ordering, date, time, loc, val, error"
 
 def prep(filename):
+    '''FILLER'''
     # Construct the full path to the database file
     db_path = os.path.join(os.path.dirname(__file__), filename + ".db")
     # Standard read/write connection
@@ -29,6 +30,7 @@ def prep(filename):
     return this_curs
 
 def create_tables():
+    '''FILLER'''
     curs = prep(FILENAME)
 
     #Create tables
@@ -36,10 +38,12 @@ def create_tables():
     curs.execute(f"CREATE TABLE IF NOT EXISTS {TABLE2NAME} {keys2_init}") # makes fridge table
 
 def delete_table(table_name):
+    '''FILLER'''
     curs = prep(FILENAME)
     curs.execute(f"DROP TABLE {table_name}")
 
 def add_member():
+    '''FILLER'''
     curs = prep(FILENAME)
     #TEST - add my telegram account to the list
     values_string = "(\"boop1328\",\"Boop\",\"2024-02-20\",1)" #TODO: should come from param instead^
@@ -47,6 +51,8 @@ def add_member():
     curs.execute("COMMIT") # SQLite command to saved the newly updated database
 
 def alert_choice(member, status):
+    '''FILLER'''
+    # TODO: use parameters instead
     member = "Abby"
     status = 1 # 1: on, get alerts - 0: off, no more alerts
     curs = prep(FILENAME)
@@ -54,11 +60,14 @@ def alert_choice(member, status):
     curs.execute("COMMIT")
 
 def isMember(userid):
-    # For bot to see if current user is on the LHQS member list
+    '''FILLER'''
+    # TODO: For bot to see if current user is on the LHQS member list
     #cur_user = curs.execute(f"SELECT name FROM {table_name} WHERE username = {tele_user}").fetchall()
 
     #Ex. sgY = curs.execute(f"SELECT Y FROM {table_name}").fetchall()
     return True
 
 def get_alert_list():
+    '''FILLER'''
+    # TODO: return userid list
     pass
