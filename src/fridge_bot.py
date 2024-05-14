@@ -9,9 +9,8 @@ import asyncio
 import logging
 import sys
 import os
-from time import sleep
-
-from aiogram import Bot, Dispatcher, types
+#from time import sleep
+from aiogram import Bot, Dispatcher
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from dotenv import load_dotenv
@@ -43,11 +42,11 @@ async def command_start_handler(message: Message) -> None:
     print(F"NAME {message.from_user.first_name}")
 
 @dp.message(Command("help"))
-async def command_start_handler(message: Message) -> None:
+async def command_help_handler(message: Message) -> None:
     """
     This handler receives messages with `/help` command and
     """
-    await message.answer(F"If you are a member of MSU LHQS try typing /start")
+    await message.answer("If you are a member of MSU LHQS try typing /start")
 
 
 # Custom Commands
@@ -74,7 +73,6 @@ async def command_status_handler(message: Message) -> None:
 async def command_errors_handler(message: Message) -> None:
     """/errorhistory - to get list of past fridge issues and dates"""
     await message.answer("Below is the error history for FRIDGEX")
- 
 # sign up for live alerts
 #   add user id to alert_list
 

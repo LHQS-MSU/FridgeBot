@@ -16,7 +16,7 @@ from aiogram import Bot, Dispatcher, types #Router #executor
 from aiogram.filters import CommandStart, Command
 #from aiogram.filters.command import CommandObject
 from aiogram.types import Message
-from telegram.ext import ConversationHandler
+#from telegram.ext import ConversationHandler <-- use??
 from dotenv import load_dotenv
 
 load_dotenv() # will search for .env file in local folder and load variables
@@ -67,19 +67,21 @@ async def command_signup_handler(message: Message) -> None:
 
 @dp.message(Command("help"))
 async def get_status(message: types.Message):
+    '''
+    FILLER
+    '''
     global counter
     print(f"MY ID? {message.from_user.id}")
     if str(message.from_user.id) == "6783498213":
-        if counter > 0: 
+        if counter > 0:
             full_message = f'<tg-spoiler> REMAINING ATTEMPTS: {counter}</tg-spoiler> \n \n'
             counter = counter - 1
             await message.reply(full_message, reply=False, parse_mode= 'HTML')
         else:
-            final_message = 'WARNING \nMaster protocol has been initiated \nOpening V18 and V19 to vent \nPlease wait...'
+            final_message = 'WARNING \nMaster protocol has been initiated \nOpening to vent'
             script_dir = os.path.dirname(__file__)  # Get the directory of the current script
             image_path = os.path.join(script_dir, 'quackQuack.jpg')
             joephoto = open(image_path, 'rb')
-            #?? joephoto = open('quackQuack.jpg', 'rb')
             await message.reply(final_message, reply=False)
             time.sleep(5)
             await bot.send_photo('6783498213', joephoto)
