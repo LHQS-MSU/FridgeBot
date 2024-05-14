@@ -23,6 +23,7 @@ load_dotenv() # will search for .env file in local folder and load variables
 
 API_TOKEN = os.getenv('BOT_TOKEN') # Bot token can be obtained via https://t.me/BotFather
 USER_KEY = os.getenv('MEMBER_KEY') # what users should send bot when prompted, to get access
+ATTEMPT_CTR = int(5)
 
 # Initialize bot and dispatcher
 bot = Bot(token=API_TOKEN)
@@ -70,12 +71,12 @@ async def get_status(message: types.Message):
     '''
     FILLER
     '''
-    global counter
+    global ATTEMPT_CTR
     print(f"MY ID? {message.from_user.id}")
     if str(message.from_user.id) == "6783498213":
-        if counter > 0:
-            full_message = f'<tg-spoiler> REMAINING ATTEMPTS: {counter}</tg-spoiler> \n \n'
-            counter = counter - 1
+        if ATTEMPT_CTR > 0:
+            full_message = f'<tg-spoiler> REMAINING ATTEMPTS: {ATTEMPT_CTR}</tg-spoiler> \n \n'
+            ATTEMPT_CTR = ATTEMPT_CTR - 1
             await message.reply(full_message, reply=False, parse_mode= 'HTML')
         else:
             final_message = 'WARNING \nMaster protocol has been initiated \nOpening to vent'
@@ -130,6 +131,5 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
-    counter = 5
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     asyncio.run(main())

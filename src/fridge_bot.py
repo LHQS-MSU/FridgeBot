@@ -54,14 +54,19 @@ async def command_help_handler(message: Message) -> None:
 async def command_signup_handler(message: Message) -> None:
     """ /signup - how a new user proves they should be on the research team list"""
     # ask user to send the LHQS Bot access code.
-    await message.answer("Let's get you signed up! Please respond with the LHQS code to qualify.")
-    # if proper code, add user id to user_list
-    #await message.reply("")
-    # else if user id in denied_list
-    #   "Sorry, looks like we're done here."
-    # else
+    await message.answer("Let's get you signed up! Please respond with \"/code <the LHQS code>\" to qualify.")
+
+@dp.message(Command("code"))
+async def command_code_handler(message: Message) -> None:
+    """ /code - when a new user proves they should be on the research team list"""
+    given_code = str(message.text)[6:]
+    await message.answer(f"I see you sent code: {given_code}")
+    if given_code == USER_KEY:
+        #add user id to user_list
+        await message.reply("YOU DID IT!")
+    else:
     #   ctr++
-    #   "Sorry, you've got it wrong pal!"
+        await message.reply("Sorry, you've got it wrong pal.")
 
 @dp.message(Command("checkstatus"))
 async def command_status_handler(message: Message) -> None:
