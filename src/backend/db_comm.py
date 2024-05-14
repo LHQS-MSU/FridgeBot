@@ -54,4 +54,11 @@ def alert_choice(member, status):
     curs.execute("COMMIT")
 
 def isMember(userid):
+    # For bot to see if current user is on the LHQS member list
+    #cur_user = curs.execute(f"SELECT name FROM {table_name} WHERE username = {tele_user}").fetchall()
+
+    #Ex. sgY = curs.execute(f"SELECT Y FROM {table_name}").fetchall()
     return True
+
+def get_alert_list():
+    pass

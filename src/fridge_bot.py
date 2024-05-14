@@ -83,9 +83,20 @@ async def command_status_handler(message: Message) -> None:
 async def command_errors_handler(message: Message) -> None:
     """/errorhistory - to get list of past fridge issues and dates"""
     await message.answer("Below is the error history for FRIDGEX")
-# sign up for live alerts
-#   add user id to alert_list
 
+@dp.message(Command("getalerts"))
+async def command_yesalert_handler(message: Message) -> None:
+    """FILLER"""
+    # sign up for live alerts
+    #   add user id to alert_list
+    await message.answer("Ya wanna sign up for alerts? Try again tomorrow...")
+
+@dp.message(Command("stopalerts"))
+async def command_noalert_handler(message: Message) -> None:
+    """FILLER"""
+    # sign up for live alerts
+    #   add user id to alert_list
+    await message.answer("Ya wanna stop your alerts? Try again tomorrow...")
 
 # Initiate/send warning alerts -- not sure how to do this yet
 #   frequently read .txt files on comp
