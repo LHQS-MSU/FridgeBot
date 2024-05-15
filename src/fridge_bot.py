@@ -29,6 +29,16 @@ bot = Bot(token=os.getenv('BOT_TOKEN'))
 #BOT_USERNAME: '@blueforsfridgebot'
 dp = Dispatcher()
 
+def auth(func):
+    '''FILLER'''
+    async def wrapper(message):
+        '''FILLER'''
+        if not db_comm.is_member(message.from_user.id):
+            return await message.reply("You shall not pass! Try /signup first.", reply=False)
+        return await func(message)
+    
+    return wrapper
+
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
     """
@@ -67,23 +77,28 @@ async def command_code_handler(message: Message) -> None:
     await message.answer(f"I see you sent code: {given_code}")
     if given_code == USER_KEY:
         db_comm.add_member((message.from_user.id),(message.from_user.full_name))
-        await message.reply("You now have access to our fridge information and will also get alerts.")
+        await message.reply("You now have access to our fridge information now!\n\
+            I also assumed you wanted to be signed up for alerts. If that was\
+                presumptuous of me, just respond with /stopalerts")
     else:
         await message.reply("Sorry, you've got it wrong pal.")
 
 @dp.message(Command("checkstatus"))
+@auth
 async def command_status_handler(message: Message) -> None:
     """/checkstatus - to get an immediate update on the main fridge stats"""
     # TODO: get experiment chamber temp using bluefors_comm.py
     await message.answer("How's our fridge doin you ask?")
 
 @dp.message(Command("errorhistory"))
+@auth
 async def command_errors_handler(message: Message) -> None:
     """/errorhistory - to get list of past fridge issues and dates"""
     # TODO: pull from db_comm.py for the fridge table's data
     await message.answer("Below is the error history for FRIDGEX")
 
 @dp.message(Command("getalerts"))
+@auth
 async def command_yesalert_handler(message: Message) -> None:
     """FILLER"""
     # 1: on, get alerts - 0: off, no more alerts
@@ -91,6 +106,7 @@ async def command_yesalert_handler(message: Message) -> None:
     await message.answer("Alrighty, you're signed up for alerts!")
 
 @dp.message(Command("stopalerts"))
+@auth
 async def command_noalert_handler(message: Message) -> None:
     """FILLER"""
     # 1: on, get alerts - 0: off, no more alerts
@@ -112,7 +128,6 @@ if __name__ == "__main__":
     #NOTE: do I need to stop it?? or does CTR^C work? 5/13
 
     db_comm.create_tables()
-    #TEST db_comm.add_member() <-- passed :) 5/14/24
 
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     asyncio.run(main())

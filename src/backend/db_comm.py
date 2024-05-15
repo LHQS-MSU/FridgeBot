@@ -2,7 +2,7 @@
 File: Database Communicator
 Project: Telegram Bot LHQS Fridge Alert System
 Developer: Abby Peterson
-Purpose: 
+Purpose: Backend structure and methods to access our SQLite local databse
 '''
 import os
 import sqlite3
@@ -21,17 +21,19 @@ KEYS2_INIT = "(ordering integer, date text, time text, loc text, val float, erro
 KEYS2_STRING = "ordering, date, time, loc, val, error"
 
 def prep(filename):
-    '''FILLER'''
+    '''PURPOSE: establish a read/write connection to our SQLite databse file
+    RETURNS: a cursor object that will allow us to browse the database'''
     # Construct the full path to the database file
     db_path = os.path.join(os.path.dirname(__file__), filename + ".db")
     # Standard read/write connection
     conn = sqlite3.connect(db_path)
-    # Create a cursor object
     this_curs = conn.cursor()  # can browse database using cursor methods
     return this_curs
 
 def create_tables():
-    '''FILLER'''
+    '''PURPOSE: Creates 2 tables in telegram_info.db
+    1. member_info: to track established LHQS users and alerts
+    2. fridge_details: where the fridge errors/past alerts are stored'''
     curs = prep(FILENAME)
 
     #Create tables
@@ -39,12 +41,14 @@ def create_tables():
     curs.execute(f"CREATE TABLE IF NOT EXISTS {TABLE2NAME} {KEYS2_INIT}") # makes fridge table
 
 def delete_table(table_name):
-    '''FILLER'''
+    '''PURPOSE: to wipe the table off of our database
+    Not currently used anywhere, but can call if needed.'''
     curs = prep(FILENAME)
     curs.execute(f"DROP TABLE {table_name}")
 
 def add_member(userid, fullname):
-    '''FILLER'''
+    '''GIVEN: userid - of telegram account signing up, fullname - of user too
+    PURPOSE: adds telegram user (LHQS member) to our database so they get full access'''
     curs = prep(FILENAME)
     today = datetime.today()
     date_format = today.strftime("%Y %m %d") # as "YYYY MM DD"
@@ -53,19 +57,27 @@ def add_member(userid, fullname):
     curs.execute("COMMIT") # SQLite command to saved the newly updated database
 
 def alert_choice(userid, status):
-    '''FILLER'''
+    '''GIVEN: userid - of telegram account changing their alert preference
+        status - 1 means yes send alerts, 0 means turn their alerts off
+    PURPOSE: called when telegram user sends /getalerts or /stopalerts'''
     curs = prep(FILENAME)
     curs.execute(f"UPDATE {TABLE1NAME} SET alerts = {status} WHERE userid = \"{userid}\"")
     curs.execute("COMMIT")
 
 def is_member(userid):
-    '''FILLER'''
-    # TODO: For bot to see if current user is on the LHQS member list
-    #curs.execute(f"SELECT name FROM {table_name} WHERE username = {tele_user}").fetchall()
-
-    #Ex. sgY = curs.execute(f"SELECT Y FROM {table_name}").fetchall()
+    '''GIVEN: userid - of telegram account changing their alert preference
+    PURPOSE: to check for qualifying accounts so that only LHQS telegram users can get access
+    RETURNS: boolean T/F depending on if the telegram user is in our member table'''
+    curs = prep(FILENAME)
+    result = curs.execute(f"SELECT name FROM {TABLE1NAME} WHERE userid = \"{userid}\"").fetchall()
+    if len(result) == 0:
+        return False
     return True
 
 def get_alert_list():
-    '''FILLER'''
-    # TODO: return userid list
+    '''PUPOSE: for our telegram bot to know who all to send fridge alerts to
+    RETURNS: a list of all the userids that want to be alerted'''
+    curs = prep(FILENAME)
+    alert_ids = curs.execute(f"SELECT userid FROM {TABLE1NAME} WHERE alerts = 1").fetchall()
+    print(alert_ids)
+    return alert_ids
