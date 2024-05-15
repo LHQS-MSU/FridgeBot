@@ -6,7 +6,6 @@ Purpose:
 Timeline: Need discovered September 2023, Finished May 2024
 """
 import asyncio
-import imp
 import logging
 import sys
 import os
@@ -17,7 +16,7 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from dotenv import load_dotenv
 
-from bluefors_comm import *
+from bluefors_comm import * #tbd which methods exactly
 from backend import db_comm
 
 load_dotenv() # will search for .env file in local folder and load variables
@@ -59,7 +58,7 @@ async def command_help_handler(message: Message) -> None:
 async def command_signup_handler(message: Message) -> None:
     """ /signup - how a new user proves they should be on the research team list"""
     # ask user to send the LHQS Bot access code.
-    await message.answer("Let's get you signed up! Please respond with \"/code <the LHQS code>\" to qualify.")
+    await message.answer("Please respond with \"/code <the LHQS code>\" to get signed up.")
 
 @dp.message(Command("code"))
 async def command_code_handler(message: Message) -> None:
@@ -68,7 +67,7 @@ async def command_code_handler(message: Message) -> None:
     await message.answer(f"I see you sent code: {given_code}")
     if given_code == USER_KEY:
         db_comm.add_member((message.from_user.id),(message.from_user.full_name))
-        await message.reply("You now have access to our fridge information and are signed up to get alerts too.")
+        await message.reply("You now have access to our fridge information and will also get alerts.")
     else:
         await message.reply("Sorry, you've got it wrong pal.")
 

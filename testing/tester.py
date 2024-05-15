@@ -71,34 +71,18 @@ async def get_status(message: types.Message):
     '''
     FILLER
     '''
-    global ATTEMPT_CTR
     print(f"MY ID? {message.from_user.id}")
     if str(message.from_user.id) == "6783498213":
-        if ATTEMPT_CTR > 0:
-            full_message = f'<tg-spoiler> REMAINING ATTEMPTS: {ATTEMPT_CTR}</tg-spoiler> \n \n'
-            ATTEMPT_CTR = ATTEMPT_CTR - 1
-            await message.reply(full_message, reply=False, parse_mode= 'HTML')
-        else:
-            final_message = 'WARNING \nMaster protocol has been initiated \nOpening to vent'
-            script_dir = os.path.dirname(__file__)  # Get the directory of the current script
-            image_path = os.path.join(script_dir, 'quackQuack.jpg')
-            joephoto = open(image_path, 'rb')
-            await message.reply(final_message, reply=False)
-            time.sleep(5)
-            await bot.send_photo('6783498213', joephoto)
+        full_message = f'<tg-spoiler> REMAINING ATTEMPTS: {0}</tg-spoiler> \n \n'
+        await message.reply(full_message, reply=False, parse_mode= 'HTML')
     else:
-        await message.reply("Hello!!!", reply=False, parse_mode= 'HTML')
-
-'''@dp.message(ConversationHandler( #Still working on it!... 12/15
-    entry_points=[Command("signup")],
-    states={
-        ATTEMPT1: [],
-        ATTEMPT2: [],
-        ATTEMPT3: [],
-        FINALRESULT: []
-    },
-    fallbacks=[CommandStart()],
-))'''
+        final_message = 'WARNING \nMaster protocol has been initiated \nOpening to vent'
+        script_dir = os.path.dirname(__file__)  # Get the directory of the current script
+        image_path = os.path.join(script_dir, 'quackQuack.jpg')
+        joephoto = open(image_path, 'rb')
+        await message.reply(final_message, reply=False)
+        time.sleep(5)
+        await bot.send_photo('6783498213', joephoto)
 
 @dp.message(Command("checkstatus"))
 async def command_status_handler(message: Message) -> None:
