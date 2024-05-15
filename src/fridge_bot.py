@@ -36,7 +36,6 @@ def auth(func):
         if not db_comm.is_member(message.from_user.id):
             return await message.reply("You shall not pass! Try /signup first.", reply=False)
         return await func(message)
-    
     return wrapper
 
 @dp.message(CommandStart())
@@ -117,10 +116,22 @@ async def command_noalert_handler(message: Message) -> None:
 #   frequently read .txt files on comp
 #   if *all these conditions*
 #       send correlating error message to alert_list
+async def send_alert_message(users):
+    message = "Hello! This is a false alarm."
+
+    for user_id in users:
+        try:
+            await bot.send_message(user_id, message)
+            print(f"Message sent to user {user_id}")
+        except Exception as e:
+            print(f"Failed to send message to user {user_id}: {e}")
 
 async def main() -> None:
     """FILLER"""
     await dp.start_polling(bot) #keep this at the end always
+
+    # Send the first message to users
+    await send_alert_message(["6783498213"]) #NOTE: not working 5/15/24
 
 
 if __name__ == "__main__":

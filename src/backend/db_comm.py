@@ -81,3 +81,4 @@ def get_alert_list():
     alert_ids = curs.execute(f"SELECT userid FROM {TABLE1NAME} WHERE alerts = 1").fetchall()
     print(alert_ids)
     return alert_ids
+    

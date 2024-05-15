@@ -5,6 +5,7 @@ Developer: Abby Peterson (credit to Niyaz Beysengulov)
 Purpose: 
 '''
 import time
+#from fridge_bot import alert_handler
 
 def get_vars(cur_line):
     '''
@@ -23,6 +24,7 @@ def check_em(temp, ranges):
         print(f"We're doin good! At {temp}")
     else:
         print(f"WEEEWOOOWEEWOO At {temp}") #telegram sends warning w/ch6_time timestamp and temp
+        #alert_handler("Who knows rn")
 
 def start_cont_check_logs():
     '''
