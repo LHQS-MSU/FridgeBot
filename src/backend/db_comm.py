@@ -6,6 +6,7 @@ Purpose:
 '''
 import os
 import sqlite3
+from datetime import datetime
 
 FILENAME = "telegram_info" # the database that will create a table we are saving values to
 TABLE1NAME = "member_info" # for telegram users to sign up for fridge bot information
@@ -42,21 +43,19 @@ def delete_table(table_name):
     curs = prep(FILENAME)
     curs.execute(f"DROP TABLE {table_name}")
 
-def add_member():
+def add_member(id, fullname):
     '''FILLER'''
     curs = prep(FILENAME)
-    #TEST - add my telegram account to the list
-    values_string = "(\"boop1328\",\"Boop\",\"2024-02-20\",1)" #TODO: should come from param instead^
+    today = datetime.today()
+    date_format = today.strftime("%Y %m %d") # as "YYYY MM DD"
+    values_string = f"(\"{id}\",\"{fullname}\",\"{date_format}\",1)" # default alert sign-up
     curs.execute(f"INSERT INTO {TABLE1NAME}({keys1_string}) VALUES {values_string}") # SQLite command
     curs.execute("COMMIT") # SQLite command to saved the newly updated database
 
-def alert_choice(member, status):
+def alert_choice(id, status):
     '''FILLER'''
-    # TODO: use parameters instead
-    member = "Abby"
-    status = 1 # 1: on, get alerts - 0: off, no more alerts
     curs = prep(FILENAME)
-    curs.execute(f"UPDATE {TABLE1NAME} SET alerts = {status} WHERE name = \"{member}\"") # for /alertson..off
+    curs.execute(f"UPDATE {TABLE1NAME} SET alerts = {status} WHERE userid = \"{id}\"") # for /alertson..off
     curs.execute("COMMIT")
 
 def isMember(userid):

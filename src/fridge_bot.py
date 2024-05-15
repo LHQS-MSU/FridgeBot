@@ -67,8 +67,8 @@ async def command_code_handler(message: Message) -> None:
     given_code = str(message.text)[6:]
     await message.answer(f"I see you sent code: {given_code}")
     if given_code == USER_KEY:
-        #TODO: add user id to user_list
-        await message.reply("YOU DID IT!")
+        db_comm.add_member((message.from_user.id),(message.from_user.full_name))
+        await message.reply("You now have access to our fridge information and are signed up to get alerts too.")
     else:
         await message.reply("Sorry, you've got it wrong pal.")
 
@@ -87,14 +87,16 @@ async def command_errors_handler(message: Message) -> None:
 @dp.message(Command("getalerts"))
 async def command_yesalert_handler(message: Message) -> None:
     """FILLER"""
-    # TODO: sign up for live alerts using db_comm method
-    await message.answer("Ya wanna sign up for alerts? Try again tomorrow...")
+    # 1: on, get alerts - 0: off, no more alerts
+    db_comm.alert_choice((message.from_user.id),1)
+    await message.answer("Alrighty, you're signed up for alerts!")
 
 @dp.message(Command("stopalerts"))
 async def command_noalert_handler(message: Message) -> None:
     """FILLER"""
-    # TODO: sign off live alerts using db_comm method
-    await message.answer("Ya wanna stop your alerts? Try again tomorrow...")
+    # 1: on, get alerts - 0: off, no more alerts
+    db_comm.alert_choice((message.from_user.id),0)
+    await message.answer("Okay okay, we stopped your alerts. Miss you!")
 
 # TODO: Initiate/send warning alerts -- not sure how to do this yet
 #   frequently read .txt files on comp
