@@ -31,7 +31,7 @@ def start_cont_check_logs(alert_func):
     FILLER
     '''
     # Initial variables
-    file_path = "lab_comp_files/CH6 T 23-12-05.log"
+    file_path = "lab_comp_files/CH6 T 23-12-05.log" #TODO: fix to appropiate local path
     exp_temp = 1 #varies based on experiment
     n = 0.02 #conditional threshold
     n_high = exp_temp + n
@@ -48,7 +48,7 @@ def start_cont_check_logs(alert_func):
                 start = False
             else:
                 temp, ch6_time = get_vars(line)
-                check_em(temp, [n_high, n_low])
+                check_em(temp, [n_high, n_low], alert_func)
 
         # Continuously read from the last position
         while True:
@@ -62,8 +62,7 @@ def start_cont_check_logs(alert_func):
             else:
                 temp, ch6_time = get_vars(line)
                 check_em(temp, [n_high, n_low], alert_func)
-                
-
+          
 async def fake_cont_check_logs(alert_funct):
     '''
     FILLER

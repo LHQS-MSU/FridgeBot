@@ -115,7 +115,7 @@ async def command_noalert_handler(message: Message) -> None:
 
 async def send_alert_message(message):
     '''
-    # TODO: Initiate/send warning alerts
+    # Initiate/send warning alerts
     #   if *all these conditions* from bluefors_comm
     #       send correlating error message to alert_list
     '''
@@ -127,7 +127,8 @@ async def send_alert_message(message):
 async def main() -> None:
     """FILLER"""
     # Start the background task to continuously check logs
-    asyncio.create_task(fake_cont_check_logs(send_alert_message)) # Pass send_alert_message function reference
+    #asyncio.create_task(fake_cont_check_logs(send_alert_message)) # Test short file reads
+    asyncio.create_task(fake_cont_check_logs(send_alert_message)) # Pass funct reference
     
     await dp.start_polling(bot) #keep this at the end always
 
