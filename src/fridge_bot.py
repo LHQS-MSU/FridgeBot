@@ -116,8 +116,8 @@ async def command_noalert_handler(message: Message) -> None:
 #   frequently read .txt files on comp
 #   if *all these conditions*
 #       send correlating error message to alert_list
-async def send_alert_message(users):
-    message = "Hello! This is a false alarm."
+async def send_alert_message(message):
+    users = db_comm.get_alert_list() #["6783498213"]
 
     for user_id in users:
         try:
@@ -128,10 +128,10 @@ async def send_alert_message(users):
 
 async def main() -> None:
     """FILLER"""
-    await dp.start_polling(bot) #keep this at the end always
-
     # Send the first message to users
-    await send_alert_message(["6783498213"]) #NOTE: not working 5/15/24
+    await send_alert_message("FALSE ALARM")
+    
+    await dp.start_polling(bot) #keep this at the end always
 
 
 if __name__ == "__main__":
