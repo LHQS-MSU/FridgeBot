@@ -16,7 +16,7 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from dotenv import load_dotenv
 
-from bluefors_comm import * #tbd which methods exactly
+from bluefors_comm import fake_cont_check_logs, start_cont_check_logs
 from backend import db_comm
 
 load_dotenv() # will search for .env file in local folder and load variables
@@ -112,32 +112,29 @@ async def command_noalert_handler(message: Message) -> None:
     db_comm.alert_choice((message.from_user.id),0)
     await message.answer("Okay okay, we stopped your alerts. Miss you!")
 
-# TODO: Initiate/send warning alerts -- not sure how to do this yet
-#   frequently read .txt files on comp
-#   if *all these conditions*
-#       send correlating error message to alert_list
-async def send_alert_message(message):
-    users = db_comm.get_alert_list() #["6783498213"]
 
+async def send_alert_message(message):
+    '''
+    # TODO: Initiate/send warning alerts
+    #   if *all these conditions* from bluefors_comm
+    #       send correlating error message to alert_list
+    '''
+    users = db_comm.get_alert_list() #["6783498213"]
     for user_id in users:
-        try:
-            await bot.send_message(user_id, message)
-            print(f"Message sent to user {user_id}")
-        except Exception as e:
-            print(f"Failed to send message to user {user_id}: {e}")
+        await bot.send_message(user_id, message)
+        print(f"Message sent to user {user_id}")
 
 async def main() -> None:
     """FILLER"""
-    # Send the first message to users
-    await send_alert_message("FALSE ALARM")
+    # Start the background task to continuously check logs
+    asyncio.create_task(fake_cont_check_logs(send_alert_message)) # Pass send_alert_message function reference
     
     await dp.start_polling(bot) #keep this at the end always
 
 
 if __name__ == "__main__":
-    #TODO: start_cont_check_logs() <-- bluefors_comm.py funct
+    #start_cont_check_logs() #<-- bluefors_comm.py funct
     #NOTE: do I need to stop it?? or does CTR^C work? 5/13
-
     db_comm.create_tables()
 
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)

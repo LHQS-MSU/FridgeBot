@@ -80,6 +80,6 @@ def get_alert_list():
     curs = prep(FILENAME)
     alert_ids = curs.execute(f"SELECT userid FROM {TABLE1NAME} WHERE alerts = 1").fetchall()
     format_ids = [] # alert_ids: [(id1,),(id2,)] <-- fixing tuple structure
-    for id in alert_ids:
-        format_ids.append(id[0])
+    for cur_id in alert_ids:
+        format_ids.append(cur_id[0])
     return format_ids
