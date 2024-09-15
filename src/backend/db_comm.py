@@ -43,6 +43,7 @@ def create_tables():
 def delete_table(table_name):
     '''PURPOSE: to wipe the table off of our database
     Not currently used anywhere, but can call if needed.'''
+    # TODO: ideally add admin command to reset all users or clear fridge history
     curs = prep(FILENAME)
     curs.execute(f"DROP TABLE {table_name}")
 
@@ -53,7 +54,8 @@ def add_member(userid, fullname):
     today = datetime.today()
     date_format = today.strftime("%Y %m %d") # as "YYYY MM DD"
     values_string = f"(\"{userid}\",\"{fullname}\",\"{date_format}\",1)" # default alert sign-up
-    curs.execute(f"INSERT INTO {TABLE1NAME}({KEYS1_STRING}) VALUES {values_string}") # SQLite
+    # TODO: add a check to see if the user is already in the table/fix multiple entries
+    curs.execute(f"INSERT OR REPLACE INTO {TABLE1NAME}({KEYS1_STRING}) VALUES {values_string}") # SQLite
     curs.execute("COMMIT") # SQLite command to saved the newly updated database
 
 def alert_choice(userid, status):

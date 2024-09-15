@@ -3,7 +3,7 @@ File: Main Telegram Fridge Bot Program
 Project: Telegram Bot LHQS Fridge Alert System
 Developer: Abby Peterson (credit to Niyaz Beysengulov)
 Purpose: 
-Timeline: Need discovered September 2023, Finished May 2024
+Timeline: Need discovered September 2023, Finished October 2024
 """
 import asyncio
 import logging
