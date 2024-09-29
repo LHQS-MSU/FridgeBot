@@ -3,7 +3,7 @@ File: Main Telegram Fridge Bot Program
 Project: Telegram Bot LHQS Fridge Alert System
 Developer: Abby Peterson (credit to Niyaz Beysengulov)
 Purpose: 
-Timeline: Need discovered September 2023, Finished October 2024
+Timeline: Need discovered September 2023, Finished November 2024
 """
 import asyncio
 import logging
@@ -60,7 +60,6 @@ async def command_help_handler(message: Message) -> None:
     This handler receives messages with `/help` command and
     """
     #TODO: make much more detailed & helpful lol
-    #GIVEN: await message.answer(f"Hello, {hbold(message.from_user.full_name)}!")
     await message.answer("If you are a member of MSU LHQS try typing /start")
 
 @dp.message(Command("signup"))
@@ -99,7 +98,7 @@ async def command_errors_handler(message: Message) -> None:
 @dp.message(Command("getalerts"))
 @auth
 async def command_yesalert_handler(message: Message) -> None:
-    """FILLER"""
+    """/getalerts - command for user to sign up for fridge alerts"""
     # 1: on, get alerts - 0: off, no more alerts
     db_comm.alert_choice((message.from_user.id),1)
     await message.answer("Alrighty, you're signed up for alerts!")
@@ -107,7 +106,7 @@ async def command_yesalert_handler(message: Message) -> None:
 @dp.message(Command("stopalerts"))
 @auth
 async def command_noalert_handler(message: Message) -> None:
-    """FILLER"""
+    """/stopalerts - command for user to unsubscribe from fridge alerts"""
     # 1: on, get alerts - 0: off, no more alerts
     db_comm.alert_choice((message.from_user.id),0)
     await message.answer("Okay okay, we stopped your alerts. Miss you!")

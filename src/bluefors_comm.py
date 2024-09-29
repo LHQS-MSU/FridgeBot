@@ -2,7 +2,7 @@
 File: Fridge Communicator
 Project: Telegram Bot LHQS Fridge Alert System
 Developer: Abby Peterson (credit to Niyaz Beysengulov)
-Purpose: 
+Purpose: Hosted on LHQS computer, tracking methods for BlueFors fridge
 '''
 import time
 import os
@@ -18,8 +18,12 @@ def get_vars(cur_line):
 
 async def check_em(temp, ranges, alert_func):
     '''
-    FILLER
+    Given a read value, check if it's w/in the asigned threshold
+    If not, send alert to users via telegram bot
     '''
+    #TODO: generalize to work with any of the 5 important values
+        # Channel 6, Pressure 1, Pressure 3&4, Pressure 5, Variables cptempwi & cptempwo
+
     if (temp < ranges[0] and temp > ranges[1]): #temp is w/in threshold yay!
         print(f"We're doin good! At {temp}")
     else:
@@ -28,7 +32,13 @@ async def check_em(temp, ranges, alert_func):
 
 def start_cont_check_logs(alert_func):
     '''
-    FILLER
+    TODO:
+    Parse continuous log files for fridge data and alert when necessary
+        Channel 6 - the mixing chamber, temperature <-- crucial
+        Pressure 1 - the vacuum can, for a potential leak
+        Pressure 3&4 - check points, to show any blocakge
+        Variables cptempwi & cptempwo - if compressor is on/off
+            Pressure 5 - if fridge turns off, to check on helium
     '''
     # Initial variables
     file_path = "lab_comp_files/CH6 T 23-12-05.log" #TODO: fix to appropiate local path
@@ -65,7 +75,7 @@ def start_cont_check_logs(alert_func):
           
 async def fake_cont_check_logs(alert_funct):
     '''
-    FILLER
+    Tester function for reading/parsing static version of files
     '''
     # Initial variables
     filename = "CH6 T 23-12-05.log"
